@@ -46,9 +46,7 @@ embedder = SentenceTransformer('all-MiniLM-L6-v2')
 image = Image.open('tokyo_night.jpg')
 st.image(image, use_column_width=True)
 
-st.title("MABA 6490 -- Assignment 2 -- Hotel Search")
-st.markdown("This app will recommend a hotel in Tokyo based on your input below")
-st.markdown("This is v1")
+st.title("Find Your Hotel in Tokyo!")
 
 # text = st.text_input('Enter text:')
 #
@@ -66,7 +64,7 @@ st.markdown("This is v1")
 #            'Hotel with large rooms and a good breakfast'
 #            ]
 
-queries = st.text_input("Describe the hotel you are looking for:")
+queries = st.text_input("Enter the kind of hotel you're looking for:")
 queries=list([queries])
 
 # Find the closest 5 sentences of the corpus for each query sentence based on cosine similarity
@@ -83,7 +81,7 @@ for query in queries:
     st.write("\nTop 5 most similar sentences in corpus:")
 
     for score, idx in zip(top_results[0], top_results[1]):
-        st.write("(Score: {:.4f})".format(score))
+        # st.write("(Score: {:.4f})".format(score))
         # st.write(corpus[idx], "(Score: {:.4f})".format(score))
 
         row_dict = df.loc[df['all_review']== corpus[idx]]
