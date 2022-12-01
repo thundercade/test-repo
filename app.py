@@ -83,14 +83,14 @@ for query in queries:
     for score, idx in zip(top_results[0], top_results[1]):
         # st.write("(Score: {:.4f})".format(score))
         # st.write(corpus[idx], "(Score: {:.4f})".format(score))
-        st.write("\n\n======================\n\n")
+        st.markdown("""---""")
         row_dict = df.loc[df['all_review']== corpus[idx]]
         row2_dict = sum_df.loc[sum_df['all_review']== corpus[idx]]
         row3_dict = df1.loc[df1['hotel']==row_dict['hotel'].values[0]]
         st.write("Hotel Name: " , row_dict['hotel'].values[0])
         st.write("Hotel Review Summary: " , row2_dict['summary'].values[0])
-        st.write("Website: " , row3_dict['url'].values[0], "\n")
-        st.write("\n\n======================\n\n")
+        st.write("Tripadvisor Link: " , row3_dict['url'].values[0], "\n")
+        st.markdown("""---""")
 
 
     # for idx, distance in results[0:closest_n]:
@@ -106,4 +106,4 @@ for query in queries:
     #     print(corpus[hit['corpus_id']], "(Score: {:.4f})".format(hit['score']))
     # """
 
-st.write("You made it to the end!")
+st.write("All of your code ran this time!")
