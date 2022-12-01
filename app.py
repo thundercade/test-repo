@@ -8,7 +8,7 @@
 #imports
 import streamlit as st
 import pandas as pd
-st.write(pd.__version__)
+# st.write(pd.__version__)
 
 import pickle as pkl
 from tqdm import tqdm
@@ -19,7 +19,8 @@ from spacy import displacy
 from string import punctuation
 from collections import Counter
 from heapq import nlargest
-
+from PIL import Image
+import torch
 import os
 # nlp = spacy.load("en_core_web_sm")
 
@@ -37,23 +38,28 @@ with open("tokyo_sum_df.pkl" , "rb") as file_4:
 with open("tokyo_df1.pkl" , "rb") as file_5:
     df1 = pkl.load(file_5)
 
+embedder = SentenceTransformer('all-MiniLM-L6-v2')
+
+
+
+
+image = Image.open('tokyo_night.jpg')
+st.image(image, use_column_width=True)
 
 st.title("MABA 6490 -- Assignment 2 -- Hotel Search")
 st.markdown("This app will recommend a hotel in Tokyo based on your input below")
 st.markdown("This is v1")
 
-text = st.text_input('Enter text:')
-
-st.write("You searched for:", text)
-
-st.write(corpus_embeddings.shape)
-st.write(df.shape)
+# text = st.text_input('Enter text:')
+#
+# st.write("You searched for:", text)
+#
+# st.write(corpus_embeddings.shape)
+# st.write(df.shape)
 
 # changes started here
 
-embedder = SentenceTransformer('all-MiniLM-L6-v2')
 
-import torch
 
 
 # queries = ['Hotel in Shibuya near a ramen shop',
