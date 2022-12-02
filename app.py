@@ -77,7 +77,7 @@ for query in queries:
     top_results = torch.topk(cos_scores, k=top_k)
 
     st.markdown("""---""")
-    st.write("You searched for:", query, "\n")
+    st.write("You searched for:   ", query, "\n")
     st.subheader("""**Here are our top 5 recommendations:**""")
 
     for score, idx in zip(top_results[0], top_results[1]):
@@ -89,7 +89,7 @@ for query in queries:
         row3_dict = df1.loc[df1['hotel']==row_dict['hotel'].values[0]]
         st.write("Hotel Name: " , row_dict['hotel'].values[0])
         st.write("Hotel Review Summary: " , row2_dict['summary'].values[0])
-        st.write("Tripadvisor Link: [link](%s)" %row3_dict['url'].values[0], "\n")
+        st.write("Tripadvisor Link: [here](%s)" %row3_dict['url'].values[0], "\n")
         st.markdown("""---""")
 
 # st.write("check out this [link](%s)" % url)
