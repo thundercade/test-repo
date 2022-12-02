@@ -76,9 +76,9 @@ for query in queries:
     cos_scores = util.pytorch_cos_sim(query_embedding, corpus_embeddings)[0]
     top_results = torch.topk(cos_scores, k=top_k)
 
-    st.write("\n\n======================\n\n")
+    st.markdown("""---""")
     st.write("You searched for:", query, "\n")
-    st.markdown("""**Here are our top 5 recommendations:**""")
+    st.subheader("""**Here are our top 5 recommendations:**""")
 
     for score, idx in zip(top_results[0], top_results[1]):
         # st.write("(Score: {:.4f})".format(score))
@@ -89,9 +89,10 @@ for query in queries:
         row3_dict = df1.loc[df1['hotel']==row_dict['hotel'].values[0]]
         st.write("Hotel Name: " , row_dict['hotel'].values[0])
         st.write("Hotel Review Summary: " , row2_dict['summary'].values[0])
-        st.write("Tripadvisor Link: " , row3_dict['url'].values[0], "\n")
+        st.write("Tripadvisor Link: [link](%s)" %row3_dict['url'].values[0], "\n")
         st.markdown("""---""")
 
+# st.write("check out this [link](%s)" % url)
 
     # for idx, distance in results[0:closest_n]:
     #     print("Score:   ", "(Score: %.4f)" % (1-distance) , "\n" )
