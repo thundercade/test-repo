@@ -23,6 +23,7 @@ from PIL import Image
 import torch
 import os
 # nlp = spacy.load("en_core_web_sm")
+# https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.2.0/en_core_web_sm-3.2.0-py3-none-any.whl
 
 import sentence_transformers
 from sentence_transformers import SentenceTransformer, util
@@ -40,7 +41,10 @@ with open("tokyo_df1.pkl" , "rb") as file_5:
 
 embedder = SentenceTransformer('all-MiniLM-L6-v2')
 
-
+# @st.cache(allow_output_mutation=True)
+# 	    def load_model():
+# 	        return SentenceTransformer('all-MiniLM-L6-v2')
+# 	    embedder = load_model()
 
 
 image = Image.open('tokyo_night.jpg')
@@ -48,21 +52,8 @@ st.image(image, use_column_width=True)
 
 st.title("Find Your Hotel in Tokyo!")
 
-# text = st.text_input('Enter text:')
-#
-# st.write("You searched for:", text)
-#
 # st.write(corpus_embeddings.shape)
 # st.write(df.shape)
-
-# changes started here
-
-
-
-
-# queries = ['Hotel in Shibuya near a ramen shop',
-#            'Hotel with large rooms and a good breakfast'
-#            ]
 
 queries = st.text_input("Enter the kind of hotel you're looking for:")
 queries = list([queries])
@@ -92,19 +83,5 @@ for query in queries:
         st.write("Tripadvisor Link: [here](%s)" %row3_dict['url'].values[0], "\n")
         st.markdown("""---""")
 
-# st.write("check out this [link](%s)" % url)
-
-    # for idx, distance in results[0:closest_n]:
-    #     print("Score:   ", "(Score: %.4f)" % (1-distance) , "\n" )
-    #     print("Paragraph:   ", corpus[idx].strip(), "\n" )
-    #     row_dict = df.loc[df['all_review']== corpus[idx]]
-    #     print("paper_id:  " , row_dict['Hotel'] , "\n")
-    # """
-    # # Alternatively, we can also use util.semantic_search to perform cosine similarty + topk
-    # hits = util.semantic_search(query_embedding, corpus_embeddings, top_k=5)
-    # hits = hits[0]      #Get the hits for the first query
-    # for hit in hits:
-    #     print(corpus[hit['corpus_id']], "(Score: {:.4f})".format(hit['score']))
-    # """
 
 st.write("All of your code ran this time!")
