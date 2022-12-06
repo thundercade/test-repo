@@ -84,4 +84,4 @@ for query in queries:
         st.markdown("""---""")
 
 
-st.write("All of your code ran this time!")
+st.write("Have fun in Japan!!!")
