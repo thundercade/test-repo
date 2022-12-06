@@ -54,33 +54,36 @@ st.title("Find Your Hotel in Tokyo!")
 
 # st.write(corpus_embeddings.shape)
 # st.write(df.shape)
-
+query = ''
 query = st.text_input("Enter the kind of hotel you're looking for:")
 # queries = list([queries])
 
 # Find the closest 5 sentences of the corpus for query sentence based on cosine similarity
-top_k = min(5, len(corpus))
-query_embedding = embedder.encode(query, convert_to_tensor=True)
+if query = '':
+    st.write("Enter a search above to get started!")
+else:
+    top_k = min(5, len(corpus))
+    query_embedding = embedder.encode(query, convert_to_tensor=True)
 
-# We use cosine-similarity and torch.topk to find the highest 5 scores
-cos_scores = util.pytorch_cos_sim(query_embedding, corpus_embeddings)[0]
-top_results = torch.topk(cos_scores, k=top_k)
+    # We use cosine-similarity and torch.topk to find the highest 5 scores
+    cos_scores = util.pytorch_cos_sim(query_embedding, corpus_embeddings)[0]
+    top_results = torch.topk(cos_scores, k=top_k)
 
-st.markdown("""---""")
-st.write("You searched for:   ", query, "\n")
-st.subheader("""**Here are our top 5 recommendations:**""")
-
-for score, idx in zip(top_results[0], top_results[1]):
-    # st.write("(Score: {:.4f})".format(score))
-    # st.write(corpus[idx], "(Score: {:.4f})".format(score))
     st.markdown("""---""")
-    row_dict = df.loc[df['all_review']== corpus[idx]]
-    row2_dict = sum_df.loc[sum_df['all_review']== corpus[idx]]
-    row3_dict = df1.loc[df1['hotel']==row_dict['hotel'].values[0]]
-    st.write("Hotel Name: " , row_dict['hotel'].values[0])
-    st.write("Hotel Review Summary: " , row2_dict['summary'].values[0])
-    st.write("Tripadvisor Link: [here](%s)" %row3_dict['url'].values[0], "\n")
-    st.markdown("""---""")
+    st.write("You searched for:   ", query, "\n")
+    st.subheader("""**Here are our top 5 recommendations:**""")
+
+    for score, idx in zip(top_results[0], top_results[1]):
+        # st.write("(Score: {:.4f})".format(score))
+        # st.write(corpus[idx], "(Score: {:.4f})".format(score))
+        st.markdown("""---""")
+        row_dict = df.loc[df['all_review']== corpus[idx]]
+        row2_dict = sum_df.loc[sum_df['all_review']== corpus[idx]]
+        row3_dict = df1.loc[df1['hotel']==row_dict['hotel'].values[0]]
+        st.write("Hotel Name: " , row_dict['hotel'].values[0])
+        st.write("Hotel Review Summary: " , row2_dict['summary'].values[0])
+        st.write("Tripadvisor Link: [here](%s)" %row3_dict['url'].values[0], "\n")
+        st.markdown("""---""")
 
 
 st.write("Have fun in Japan!!!")
