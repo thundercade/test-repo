@@ -59,7 +59,7 @@ query = st.text_input("Enter the kind of hotel you're looking for:")
 # queries = list([queries])
 
 # Find the closest 5 sentences of the corpus for query sentence based on cosine similarity
-if query = '':
+if query == '':
     st.write("Enter a search above to get started!")
 else:
     top_k = min(5, len(corpus))
