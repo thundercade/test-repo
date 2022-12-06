@@ -39,12 +39,12 @@ with open("tokyo_sum_df.pkl" , "rb") as file_4:
 with open("tokyo_df1.pkl" , "rb") as file_5:
     df1 = pkl.load(file_5)
 
-embedder = SentenceTransformer('all-MiniLM-L6-v2')
+# embedder = SentenceTransformer('all-MiniLM-L6-v2')
 
-# @st.cache(allow_output_mutation=True)
-# 	    def load_model():
-# 	        return SentenceTransformer('all-MiniLM-L6-v2')
-# 	    embedder = load_model()
+@st.cache(allow_output_mutation=True)
+def load_model():
+    return SentenceTransformer('all-MiniLM-L6-v2')
+embedder = load_model()
 
 
 image = Image.open('tokyo_night.jpg')
